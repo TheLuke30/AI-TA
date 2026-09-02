@@ -1,0 +1,26 @@
+# --- secrets: never commit real keys ---
+.env
+.env.*
+!.env.example
+
+# --- python ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# --- node / frontend build output ---
+node_modules/
+dist/
+
+# --- editors / OS noise ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- personal project notes (interview context; repo is public) ---
+CLAUDE.md
