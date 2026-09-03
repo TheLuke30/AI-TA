@@ -1,0 +1,17 @@
+# Never send these to the Docker daemon: secrets, local envs, VCS, data, build output
+.env
+.env.*
+.venv
+.git
+.github
+.pytest_cache
+.ruff_cache
+__pycache__
+**/__pycache__
+node_modules
+dist
+data
+docs
+k8s
+manifests
+*.md

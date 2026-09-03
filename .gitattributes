@@ -1,0 +1,3 @@
+# Normalize line endings: LF in the repo regardless of OS. Windows editors may write CRLF;
+# git converts on commit so Docker builds and Linux runners see identical bytes.
+* text=auto eol=lf
