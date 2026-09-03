@@ -1,0 +1,8 @@
+# The base: every environment starts from these files. Overlays patch what differs.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - hpa.yaml

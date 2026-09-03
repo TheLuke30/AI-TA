@@ -1,0 +1,14 @@
+# Stable address for the api pods. Anything in the cluster can reach http://api:80.
+# Traffic goes only to pods whose labels match the selector AND whose readiness probe passes.
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+spec:
+  type: ClusterIP # internal only; an Ingress or LoadBalancer exposes it outside
+  selector:
+    app: api
+  ports:
+    - name: http
+      port: 80         # the Service's port
+      targetPort: 8000 # the container's port

@@ -1,0 +1,8 @@
+# Non-secret configuration, injected into the api container as environment variables.
+# Overlays override APP_ENV per environment. Secrets (API keys) go in a Secret, never here.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+data:
+  APP_ENV: base
