@@ -1,0 +1,10 @@
+{
+    "name": "local-files-to-pinecone",
+    "frequency": "manual",
+    "operators": {
+        "id": "src",
+        "type": "local-file-source",
+        "config": {"path": "data/sample", "class_id": "bio101"},
+        "predecessors": []
+    }
+}

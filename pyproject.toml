@@ -3,8 +3,10 @@ name = "ai-ta"
 version = "0.1.0"
 description = "Personal rebuild of an AI teaching-assistant platform: RAG over Pinecone + Neo4j, MongoDB, LiveKit voice, on Docker/Kubernetes/AWS."
 requires-python = ">=3.12"
-# Runtime dependencies are added per step (Step 2: openai, pinecone, pypdf ...).
-dependencies = []
+# The root project depends on the workspace members; each member lists its own runtime deps.
+dependencies = [
+    "ai-ta-ingest",
+]
 
 # Tools needed to develop and test, but never shipped in a production image.
 [dependency-groups]
@@ -12,6 +14,13 @@ dev = [
     "ruff>=0.6",
     "pytest>=8",
 ]
+
+# ---- uv workspace: one venv + one lock file, many packages/services ----
+[tool.uv.workspace]
+members = ["packages/ingest"]
+
+[tool.uv.sources]
+ai-ta-ingest = { workspace = true }
 
 # ---- tool configuration ----
 

@@ -1,0 +1,16 @@
+[project]
+name = "ai-ta-ingest"
+version = "0.1.0"
+description = "Manifest-driven ingest operators: source -> extract -> chunk -> embed -> sink"
+requires-python = ">=3.12"
+dependencies = [
+    "pypdf>=5",          # extract-text: read PDF pages
+    "openai>=1.50",      # embed: text-embedding-3-small
+    "pinecone>=5",       # sink: upsert vectors
+    "python-dotenv>=1",  # load .env when run locally
+]
+
+# uv's own build backend: knows the src/ layout, nothing extra to install.
+[build-system]
+requires = ["uv_build>=0.8,<0.13"]
+build-backend = "uv_build"
