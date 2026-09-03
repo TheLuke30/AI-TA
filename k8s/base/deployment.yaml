@@ -1,0 +1,49 @@
+# The api Deployment. Luke writes this one. Fill in every TODO; keep the structure.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api            # must match the pod template labels below
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1         # may create 1 extra pod above the desired count during a rollout
+      maxUnavailable: 0   # never take a pod down before its replacement is ready
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: ai-ta-api:local            # the image you built, with its tag
+          imagePullPolicy: IfNotPresent   # use the local image; don't try to pull from a registry
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: api-config       # the ConfigMap in configmap.yaml
+          resources:
+            requests:            # what the scheduler reserves for this pod
+              cpu: 100m          # 0.1 CPU
+              memory: 128Mi
+            limits:              # hard ceiling; exceeding memory gets the container killed
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:         # restart the container if this fails repeatedly
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:        # send traffic only while this passes
+            httpGet:
+              path: /health
+              port: 8000
+            periodSeconds: 5

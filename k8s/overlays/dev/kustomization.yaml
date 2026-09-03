@@ -1,0 +1,22 @@
+# dev environment: same base, its own namespace, its own config and replica count.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dev
+resources:
+  - namespace.yaml
+  - ../../base
+patches:
+  - patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: api-config
+      data:
+        APP_ENV: dev
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: api
+      spec:
+        replicas: 2
