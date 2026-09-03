@@ -24,3 +24,9 @@ Thumbs.db
 
 # --- personal project notes (interview context; repo is public) ---
 CLAUDE.md
+
+# --- local course files used for ingest testing ---
+data/
+
+# --- personal interview prep (repo is public) ---
+docs/interview-prep-*.md
