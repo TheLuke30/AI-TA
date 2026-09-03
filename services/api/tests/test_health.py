@@ -10,6 +10,7 @@ def test_health_return_ok():
     assert response.status_code == 200
     assert response.json() == {"status": "ok", "env": "local", "version": app.version}
 
+
 def test_health_reports_env(monkeypatch):
     monkeypatch.setenv("APP_ENV", "test")
     response = client.get("/health")
